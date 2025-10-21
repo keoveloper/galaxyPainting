@@ -1,0 +1,92 @@
+---
+// src/components/Services.astro
+const services = [
+  {
+    icon: "🏠",
+    title: "Interior Painting",
+    description: "Transform your indoor spaces with our professional interior painting services. We handle everything from walls and ceilings to trim and doors."
+  },
+  {
+    icon: "🏡",
+    title: "Exterior Painting",
+    description: "Protect and beautify your home's exterior with weather-resistant paint. We ensure long-lasting results that withstand the elements."
+  },
+  {
+    icon: "🏢",
+    title: "Commercial Painting",
+    description: "Professional painting services for offices, retail spaces, and commercial buildings. Minimal disruption to your business operations."
+  },
+  {
+    icon: "🏘️",
+    title: "Residential Painting",
+    description: "Complete home painting solutions for homeowners. From single rooms to entire houses, we deliver quality results."
+  },
+  {
+    icon: "🪵",
+    title: "Deck & Fence Staining",
+    description: "Protect and enhance your outdoor wood structures with professional staining services that extend their lifespan."
+  },
+  {
+    icon: "💦",
+    title: "Pressure Washing",
+    description: "Thorough cleaning of surfaces before painting. Ensures optimal paint adhesion and long-lasting results."
+  }
+];
+---
+
+<section id="services" class="py-20 bg-darkest">
+  <div class="container mx-auto px-4">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-100 mb-4">
+        Our Painting Services
+      </h2>
+      <p class="text-xl text-slate-300">
+        Professional painting solutions for residential and commercial properties. Quality workmanship guaranteed on every project.
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((service) => (
+        <div class="group bg-dark border border-slate-700 rounded-xl p-8 hover:shadow-2xl hover:border-accent transition-all duration-300 hover:-translate-y-2">
+          
+          <!-- Icon -->
+          <div class="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+            {service.icon}
+          </div>
+          
+          <!-- Title -->
+          <h3 class="text-2xl font-bold text-slate-100 mb-3 group-hover:text-accent transition">
+            {service.title}
+          </h3>
+          
+          <!-- Description -->
+          <p class="text-slate-300 leading-relaxed">
+            {service.description}
+          </p>
+          
+          <!-- Learn More Link -->
+          <a href="#contact" class="inline-flex items-center space-x-2 text-accent font-semibold mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+            <span>Get a Quote</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-12">
+      <p class="text-slate-300 mb-4 text-lg">
+        Don't see what you're looking for? We handle all types of painting projects!
+      </p>
+      <a href="#contact" class="inline-block bg-accent text-darkest px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition shadow-lg">
+        Request Custom Quote
+      </a>
+    </div>
+
+  </div>
+</section>

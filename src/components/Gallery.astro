@@ -1,0 +1,184 @@
+---
+// src/components/Gallery.astro
+// Nota: Aquí usarías las URLs de las fotos reales del cliente
+const projects = [
+  {
+    before: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=800",
+    after: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+    title: "Living Room Transformation",
+    category: "Interior"
+  },
+  {
+    before: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800",
+    after: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800",
+    title: "Kitchen Cabinet Refresh",
+    category: "Interior"
+  },
+  {
+    before: "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800",
+    after: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800",
+    title: "Exterior House Painting",
+    category: "Exterior"
+  },
+  {
+    before: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800",
+    after: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800",
+    title: "Bedroom Makeover",
+    category: "Interior"
+  },
+  {
+    before: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800",
+    after: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800",
+    title: "Office Space",
+    category: "Commercial"
+  },
+  {
+    before: "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800",
+    after: "https://images.unsplash.com/photo-1600566753151-384129cf4e3e?w=800",
+    title: "Deck Staining",
+    category: "Exterior"
+  }
+];
+---
+
+<section id="gallery" class="py-20 bg-darkest">
+  <div class="container mx-auto px-4">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-100 mb-4">
+        Our Work
+      </h2>
+      <p class="text-xl text-slate-300 mb-8">
+        See the quality and transformation we bring to every project. Browse our before and after gallery.
+      </p>
+      
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <button class="gallery-filter px-6 py-2 rounded-full bg-accent text-darkest font-semibold hover:bg-yellow-400 transition" data-filter="all">
+          All Projects
+        </button>
+        <button class="gallery-filter px-6 py-2 rounded-full bg-dark text-slate-300 font-semibold hover:bg-slate-800 transition" data-filter="Interior">
+          Interior
+        </button>
+        <button class="gallery-filter px-6 py-2 rounded-full bg-dark text-slate-300 font-semibold hover:bg-slate-800 transition" data-filter="Exterior">
+          Exterior
+        </button>
+        <button class="gallery-filter px-6 py-2 rounded-full bg-dark text-slate-300 font-semibold hover:bg-slate-800 transition" data-filter="Commercial">
+          Commercial
+        </button>
+      </div>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((project, index) => (
+        <div class="gallery-item group cursor-pointer" data-category={project.category}>
+          <div class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+            
+            <!-- Before/After Container -->
+            <div class="relative aspect-[4/3]">
+              <!-- Before Image -->
+              <div class="absolute inset-0 before-image">
+                <img 
+                  src={project.before} 
+                  alt={`${project.title} - Before`}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div class="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                  BEFORE
+                </div>
+              </div>
+              
+              <!-- After Image (Overlay) -->
+              <div class="absolute inset-0 after-image opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <img 
+                  src={project.after} 
+                  alt={`${project.title} - After`}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                  AFTER
+                </div>
+              </div>
+
+              <!-- Hover Overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div class="p-6 text-white w-full">
+                  <h3 class="text-xl font-bold mb-1">{project.title}</h3>
+                  <p class="text-sm opacity-90">{project.category} Project</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Info Below -->
+            <div class="p-4 bg-dark">
+              <h3 class="font-bold text-slate-100 mb-1">{project.title}</h3>
+              <p class="text-sm text-slate-400">{project.category}</p>
+              <div class="mt-2 text-sm text-accent font-semibold opacity-0 group-hover:opacity-100 transition">
+                Hover to see transformation →
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-12">
+      <p class="text-slate-300 mb-6 text-lg">
+        Want to see your project featured here? Let's make it happen!
+      </p>
+      <a href="#contact" class="inline-block bg-accent text-darkest px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition shadow-lg">
+        Start Your Project
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Gallery Filter
+  const filterButtons = document.querySelectorAll('.gallery-filter');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+      
+      // Update active button
+      filterButtons.forEach(btn => {
+        btn.classList.remove('bg-accent', 'text-darkest');
+        btn.classList.add('bg-dark', 'text-slate-300');
+      });
+      button.classList.remove('bg-dark', 'text-slate-300');
+      button.classList.add('bg-accent', 'text-darkest');
+
+      // Filter items
+      galleryItems.forEach(item => {
+        const category = item.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          item.style.display = 'block';
+          setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+          }, 10);
+        } else {
+          item.style.opacity = '0';
+          item.style.transform = 'scale(0.8)';
+          setTimeout(() => {
+            item.style.display = 'none';
+          }, 300);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .gallery-item {
+    transition: opacity 0.3s, transform 0.3s;
+  }
+</style>

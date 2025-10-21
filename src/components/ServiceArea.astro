@@ -1,0 +1,103 @@
+---
+// src/components/ServiceArea.astro
+const cities = [
+  "Austin", "Dallas", "Houston", "San Antonio", "Fort Worth",
+  "El Paso", "Arlington", "Corpus Christi", "Plano", "Laredo",
+  "Lubbock", "Irving", "Garland", "Frisco", "McKinney",
+  "Grand Prairie", "Amarillo", "Round Rock", "Denton", "Pearland"
+];
+---
+
+<section class="py-20 bg-darkest">
+  <div class="container mx-auto px-4">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-100 mb-4">
+        Areas We Serve
+      </h2>
+      <p class="text-xl text-slate-300">
+        Proudly serving <span class="font-bold text-accent">Texas</span> and surrounding areas with professional painting services
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      
+      <!-- Map Side -->
+      <div class="order-2 lg:order-1">
+        <div class="relative">
+          <!-- Placeholder for map - replace with actual map embed -->
+          <div class="aspect-square rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-dark to-darkest border border-slate-700">
+            <div class="w-full h-full flex items-center justify-center">
+              <div class="text-center p-8">
+                <svg class="w-32 h-32 mx-auto mb-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <p class="text-lg font-semibold text-slate-300">Service Area Map</p>
+                <p class="text-sm text-slate-400 mt-2">Covering major cities across Texas</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Stats Overlay -->
+          <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-full max-w-md">
+            <div class="bg-dark rounded-xl shadow-2xl p-6 border border-slate-700">
+              <div class="grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <div class="text-3xl font-bold text-accent">20+</div>
+                  <div class="text-sm text-slate-400">Cities</div>
+                </div>
+                <div>
+                  <div class="text-3xl font-bold text-accent">50mi</div>
+                  <div class="text-sm text-slate-400">Radius</div>
+                </div>
+                <div>
+                  <div class="text-3xl font-bold text-accent">24/7</div>
+                  <div class="text-sm text-slate-400">Available</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cities List Side -->
+      <div class="order-1 lg:order-2">
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold text-slate-100 mb-4">
+            Cities We Serve
+          </h3>
+          <p class="text-slate-300 leading-relaxed">
+            We provide professional painting services throughout Texas. Whether you're in a major city or surrounding area, our experienced team is ready to transform your space.
+          </p>
+        </div>
+
+        <!-- Cities Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
+          {cities.map((city) => (
+            <div class="flex items-center space-x-2 bg-dark rounded-lg p-3 hover:bg-slate-800 transition group border border-slate-700">
+              <svg class="w-4 h-4 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-slate-300 font-medium group-hover:text-accent transition">{city}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Additional Info -->
+        <div class="bg-gradient-to-r from-accent/80 to-yellow-400/80 rounded-xl p-6 text-darkest">
+          <h4 class="text-xl font-bold mb-3">Don't See Your City?</h4>
+          <p class="mb-4 text-yellow-900">
+            We frequently expand our service area. Contact us to see if we can help with your project!
+          </p>
+          <a href="#contact" class="inline-block bg-dark text-slate-100 px-6 py-2 rounded-lg font-semibold hover:bg-slate-800 transition">
+            Contact Us
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

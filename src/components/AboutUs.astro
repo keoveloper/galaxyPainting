@@ -1,0 +1,146 @@
+---
+// src/components/AboutUs.astro
+---
+
+<section id="about" class="py-20 bg-gradient-to-b from-dark to-darkest">
+  <div class="container mx-auto px-4">
+    
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      
+      <!-- Image Side -->
+      <div class="order-2 lg:order-1">
+        <div class="relative">
+          <!-- Main Image -->
+          <div class="rounded-2xl overflow-hidden shadow-2xl">
+            <img 
+              src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800" 
+              alt="Professional painting team"
+              class="w-full h-[500px] object-cover"
+            />
+          </div>
+          
+          <!-- Floating Badge -->
+          <div class="absolute -bottom-6 -right-6 bg-accent text-darkest rounded-2xl p-6 shadow-2xl">
+            <div class="text-center">
+              <div class="text-4xl font-bold mb-1">10+</div>
+              <div class="text-sm">Years of<br/>Excellence</div>
+            </div>
+          </div>
+
+          <!-- Secondary Image -->
+          <div class="absolute -top-6 -left-6 w-48 h-48 rounded-xl overflow-hidden shadow-xl border-4 border-white hidden md:block">
+            <img 
+              src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400" 
+              alt="Quality painting work"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Side -->
+      <div class="order-1 lg:order-2">
+        <div class="max-w-xl">
+          
+          <!-- Badge -->
+          <div class="inline-block bg-medium text-slate-200 px-4 py-2 rounded-full font-semibold text-sm mb-4">
+            About ProPaint
+          </div>
+
+          <!-- Heading -->
+          <h2 class="text-4xl md:text-5xl font-bold text-slate-100 mb-6">
+            Your Trusted Painting Partner Since 2015
+          </h2>
+
+          <!-- Description -->
+          <p class="text-lg text-slate-300 mb-6 leading-relaxed">
+            ProPaint was founded with a simple mission: to provide exceptional painting services with integrity, quality, and customer satisfaction at the forefront of everything we do.
+          </p>
+
+          <p class="text-lg text-slate-300 mb-8 leading-relaxed">
+            What started as a small family business has grown into one of the most trusted painting companies in Texas. With over a decade of experience, we've completed thousands of projects, from single-room refreshes to large commercial buildings.
+          </p>
+
+          <!-- Key Points -->
+          <div class="space-y-4 mb-8">
+            <div class="flex items-start space-x-3">
+              <div class="flex-shrink-0 w-6 h-6 bg-accent rounded-full flex items-center justify-center mt-1">
+                <svg class="w-4 h-4 text-darkest" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-100 mb-1">Licensed & Insured</h4>
+                <p class="text-slate-300">Fully licensed (Lic #123456) and insured for your protection</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+              <div class="flex-shrink-0 w-6 h-6 bg-accent rounded-full flex items-center justify-center mt-1">
+                <svg class="w-4 h-4 text-darkest" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-100 mb-1">Experienced Team</h4>
+                <p class="text-slate-300">Our painters average 8+ years of professional experience</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+              <div class="flex-shrink-0 w-6 h-6 bg-accent rounded-full flex items-center justify-center mt-1">
+                <svg class="w-4 h-4 text-darkest" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-100 mb-1">Quality Materials</h4>
+                <p class="text-slate-300">We use only premium paints from Sherwin-Williams and Benjamin Moore</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+              <div class="flex-shrink-0 w-6 h-6 bg-accent rounded-full flex items-center justify-center mt-1">
+                <svg class="w-4 h-4 text-darkest" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-100 mb-1">Satisfaction Guaranteed</h4>
+                <p class="text-slate-300">We're not happy until you're thrilled with the results</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certifications -->
+          <div class="bg-dark rounded-xl p-6 shadow-lg border border-slate-700">
+            <h4 class="font-bold text-slate-100 mb-4">Certifications & Memberships</h4>
+            <div class="flex flex-wrap gap-4">
+              <div class="flex items-center space-x-2 text-sm text-slate-300">
+                <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="font-medium">BBB Accredited</span>
+              </div>
+              <div class="flex items-center space-x-2 text-sm text-slate-300">
+                <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="font-medium">EPA Certified</span>
+              </div>
+              <div class="flex items-center space-x-2 text-sm text-slate-300">
+                <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="font-medium">Insured</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
