@@ -1,21 +1,20 @@
 ---
 // src/components/Header.astro
+import logoPaint from '../assets/img/galxyPainting.png';
 ---
 
 <header id="header" class="fixed top-0 left-0 right-0 z-50 bg-dark shadow-md transition-all duration-300">
   <div class="container mx-auto px-4">
     <div class="flex items-center justify-between h-20">
-      
+
       <!-- Logo -->
       <div class="flex items-center">
         <a href="#home" class="flex items-center space-x-2">
-          <div class="w-12 h-12 bg-accent rounded-lg flex items-center justify-center">
-            <span class="text-darkest text-2xl font-bold">P</span>
-          </div>
-          <div class="hidden sm:block">
-            <div class="text-xl font-bold text-slate-200">ProPaint</div>
-            <div class="text-xs text-slate-400">Professional Services</div>
-          </div>
+          <img src={logoPaint.src} alt="Galaxy Painting Logo" class="w-40 h-40  object-contain" />
+          <!-- <div class="hidden sm:block"> -->
+          <!--   <div class="text-xl font-bold text-slate-200">Galaxy Painting</div> -->
+          <!--   <div class="text-xs text-slate-400">Professional Services</div> -->
+          <!-- </div> -->
         </a>
       </div>
 

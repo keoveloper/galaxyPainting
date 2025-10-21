@@ -31,7 +31,7 @@ export default function FloatingButtons() {
         href="https://wa.me/15555551234?text=Hi!%20I'm%20interested%20in%20a%20painting%20quote"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-40 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 group"
+        className="fixed bottom-12 right-6 z-40 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 group"
         aria-label="Chat on WhatsApp"
       >
         <div className="flex items-center space-x-2 px-4 py-3">
