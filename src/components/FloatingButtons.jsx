@@ -28,7 +28,7 @@ export default function FloatingButtons() {
     <>
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/15555551234?text=Hi!%20I'm%20interested%20in%20a%20painting%20quote"
+        href="https://wa.me/18125573291?text=Hi!%20I'm%20interested%20in%20a%20painting%20quote"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-40 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 group"
@@ -45,7 +45,7 @@ export default function FloatingButtons() {
 
       {/* Call Button (Mobile Only) */}
       <a
-        href="tel:+15555551234"
+        href="tel:+18125573291"
         className="fixed bottom-24 right-6 z-40 lg:hidden bg-accent hover:bg-yellow-400 text-white p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110"
         aria-label="Call us"
       >

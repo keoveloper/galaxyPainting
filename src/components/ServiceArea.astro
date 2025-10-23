@@ -22,24 +22,24 @@ const cities = [
     </div>
 
     <div class="grid lg:grid-cols-2 gap-12 items-center">
-      
+
       <!-- Map Side -->
-      <div class="order-2 lg:order-1">
+      <div class="order-1 lg:order-1">
         <div class="relative">
-          <!-- Placeholder for map - replace with actual map embed -->
-          <div class="aspect-square rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-dark to-darkest border border-slate-700">
-            <div class="w-full h-full flex items-center justify-center">
-              <div class="text-center p-8">
-                <svg class="w-32 h-32 mx-auto mb-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                <p class="text-lg font-semibold text-slate-300">Service Area Map</p>
-                <p class="text-sm text-slate-400 mt-2">Covering major cities across Texas</p>
-              </div>
-            </div>
+          <!-- Google Maps Embed -->
+          <div class="aspect-square rounded-2xl overflow-hidden shadow-2xl">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3141577.564010531!2d-89.08084746530065!3d39.74084496672407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886b50bcd9f81b1d%3A0x7e102fcecb32ec72!2sIndiana%2C%20EE.%20UU.!5e0!3m2!1ses-419!2smx!4v1761067134409!5m2!1ses-419!2smx"
+              width="100%"
+              height="100%"
+              style="border:0;"h
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Service Area Map"
+              ></iframe>
           </div>
-          
+
           <!-- Stats Overlay -->
           <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-full max-w-md">
             <div class="bg-dark rounded-xl shadow-2xl p-6 border border-slate-700">
@@ -63,25 +63,25 @@ const cities = [
       </div>
 
       <!-- Cities List Side -->
-      <div class="order-1 lg:order-2">
+      <div class="order-2 lg:order-2">
         <div class="mb-8">
           <h3 class="text-2xl font-bold text-slate-100 mb-4">
             Cities We Serve
           </h3>
           <p class="text-slate-300 leading-relaxed">
-            We provide professional painting services throughout Texas. Whether you're in a major city or surrounding area, our experienced team is ready to transform your space.
+          We provide professional painting services throughout Texas. Whether you're in a major city or surrounding area, our experienced team is ready to transform your space.
           </p>
         </div>
 
         <!-- Cities Grid -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
           {cities.map((city) => (
-            <div class="flex items-center space-x-2 bg-dark rounded-lg p-3 hover:bg-slate-800 transition group border border-slate-700">
-              <svg class="w-4 h-4 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-slate-300 font-medium group-hover:text-accent transition">{city}</span>
-            </div>
+          <div class="flex items-center space-x-2 bg-dark rounded-lg p-3 hover:bg-slate-800 transition group border border-slate-700">
+            <svg class="w-4 h-4 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-slate-300 font-medium group-hover:text-accent transition">{city}</span>
+          </div>
           ))}
         </div>
 
@@ -89,7 +89,7 @@ const cities = [
         <div class="bg-gradient-to-r from-accent/80 to-yellow-400/80 rounded-xl p-6 text-darkest">
           <h4 class="text-xl font-bold mb-3">Don't See Your City?</h4>
           <p class="mb-4 text-yellow-900">
-            We frequently expand our service area. Contact us to see if we can help with your project!
+          We frequently expand our service area. Contact us to see if we can help with your project!
           </p>
           <a href="#contact" class="inline-block bg-dark text-slate-100 px-6 py-2 rounded-lg font-semibold hover:bg-slate-800 transition">
             Contact Us
