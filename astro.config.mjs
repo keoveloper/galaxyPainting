@@ -5,7 +5,5 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://keoveloper.github.io",
-  base: "/galaxyPainting",
   integrations: [tailwind(), react()],
 });
