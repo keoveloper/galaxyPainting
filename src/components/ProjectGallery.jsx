@@ -53,6 +53,59 @@ const projects = [
   },
   {
     id: 2,
+    title: "Accent Wall Design",
+    category: "Interior",
+    thumbnail: "/gallery/accentWall/accent9.jpeg",
+    images: [
+      {
+        url: "/gallery/accentWall/accent.jpeg",
+        caption: "Accent wall design 1",
+        type: "before",
+      },
+      {
+        url: "/gallery/accentWall/accent2.jpeg",
+        caption: "Accent wall design 2",
+        type: "before",
+      },
+      {
+        url: "/gallery/accentWall/accent3.jpeg",
+        caption: "Accent wall design 3",
+        type: "before",
+      },
+      {
+        url: "/gallery/accentWall/accent4.jpeg",
+        caption: "Accent wall design 4",
+        type: "before",
+      },
+      {
+        url: "/gallery/accentWall/accent5.jpeg",
+        caption: "Accent wall design 5",
+        type: "before",
+      },
+      {
+        url: "/gallery/accentWall/accent6.jpeg",
+        caption: "Accent wall design 6",
+        type: "after",
+      },
+      {
+        url: "/gallery/accentWall/accent7.jpeg",
+        caption: "Accent wall design 7",
+        type: "after",
+      },
+      {
+        url: "/gallery/accentWall/accent8.jpeg",
+        caption: "Accent wall design 8",
+        type: "after",
+      },
+      {
+        url: "/gallery/accentWall/accent9.jpeg",
+        caption: "Accent wall design 9",
+        type: "after",
+      },
+    ],
+  },
+  {
+    id: 9,
     title: "Interior Room Painting",
     category: "Interior",
     thumbnail: "/gallery/interior/interior13.jpeg",
@@ -216,6 +269,49 @@ const projects = [
     ],
   },
   {
+    id: 5,
+    title: "Exterior House Project 3",
+    category: "Exterior",
+    thumbnail: "/gallery/exteriorHouse3/exterior7.jpeg",
+    images: [
+      {
+        url: "/gallery/exteriorHouse3/exterior.jpeg",
+        caption: "Before - Original exterior",
+        type: "before",
+      },
+      {
+        url: "/gallery/exteriorHouse3/exterior2.jpeg",
+        caption: "After - Fresh exterior paint",
+        type: "before",
+      },
+      {
+        url: "/gallery/exteriorHouse3/exterior3.jpeg",
+        caption: "After - Different perspective",
+        type: "before",
+      },
+      {
+        url: "/gallery/exteriorHouse3/exterior4.jpeg",
+        caption: "After - Side detail",
+        type: "before",
+      },
+      {
+        url: "/gallery/exteriorHouse3/exterior5.jpeg",
+        caption: "After - Front angle",
+        type: "after",
+      },
+      {
+        url: "/gallery/exteriorHouse3/exterior6.jpeg",
+        caption: "After - Overall view",
+        type: "after",
+      },
+      {
+        url: "/gallery/exteriorHouse3/exterior7.jpeg",
+        caption: "After - Complete transformation",
+        type: "after",
+      },
+    ],
+  },
+  {
     id: 7,
     title: "Garage Painting",
     category: "Exterior",
@@ -291,7 +387,54 @@ const projects = [
       },
     ],
   },
-  ,
+  {
+    id: 8,
+    title: "Commercial Painting",
+    category: "Commercial",
+    thumbnail: "/gallery/commercial/commercial.jpeg",
+    images: [
+      {
+        url: "/gallery/commercial/commercial.jpeg",
+        caption: "Commercial project view 1",
+        type: "before",
+      },
+      {
+        url: "/gallery/commercial/commercial2.jpeg",
+        caption: "Commercial project view 2",
+        type: "before",
+      },
+      {
+        url: "/gallery/commercial/commercial3.jpeg",
+        caption: "Commercial project view 3",
+        type: "before",
+      },
+      {
+        url: "/gallery/commercial/commercial4.jpeg",
+        caption: "Commercial project view 4",
+        type: "before",
+      },
+      {
+        url: "/gallery/commercial/commercial5.jpeg",
+        caption: "Commercial project view 5",
+        type: "before",
+      },
+      {
+        url: "/gallery/commercial/commercial6.jpeg",
+        caption: "Commercial project view 6",
+        type: "after",
+      },
+      {
+        url: "/gallery/commercial/commercial7.jpeg",
+        caption: "Commercial project view 7",
+        type: "after",
+      },
+      {
+        url: "/gallery/commercial/commercial8.jpeg",
+        caption: "Commercial project final result",
+        type: "after",
+      },
+    ],
+  },
 ];
 
 export default function ProjectGallery() {
