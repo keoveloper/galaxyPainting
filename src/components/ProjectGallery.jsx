@@ -391,7 +391,7 @@ const projects = [
     id: 8,
     title: "Commercial Painting",
     category: "Commercial",
-    thumbnail: "/gallery/commercial/commercial.jpeg",
+    thumbnail: "/gallery/commercial/commercial8.jpeg",
     images: [
       {
         url: "/gallery/commercial/commercial.jpeg",
