@@ -9,7 +9,6 @@ export default function ContactForm() {
     address: "",
     serviceType: "",
     message: "",
-    contactMethod: "phone",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,14 +28,13 @@ export default function ContactForm() {
     setSubmitStatus(null);
 
     try {
-      // Reemplaza con tu endpoint real (Web3Forms, Formspree, etc.)
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          access_key: "YOUR_WEB3FORMS_ACCESS_KEY_HERE", // Reemplaza con tu API key
+          access_key: import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY,
           ...formData,
           subject: `New Quote Request from ${formData.name}`,
         }),
@@ -51,7 +49,6 @@ export default function ContactForm() {
           address: "",
           serviceType: "",
           message: "",
-          contactMethod: "phone",
         });
       } else {
         setSubmitStatus("error");
@@ -162,7 +159,7 @@ export default function ContactForm() {
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 rounded-lg border bg-darkest border-slate-600 text-slate-200 focus:border-accent focus:ring-2 focus:ring-yellow-400/50 outline-none transition"
-                        placeholder="Austin, TX"
+                        placeholder="Louisville, KY"
                       />
                     </div>
                   </div>
@@ -184,12 +181,12 @@ export default function ContactForm() {
                       className="w-full px-4 py-3 rounded-lg border bg-darkest border-slate-600 text-slate-200 focus:border-accent focus:ring-2 focus:ring-yellow-400/50 outline-none transition"
                     >
                       <option value="">Select a service...</option>
-                      <option value="interior">Interior Painting</option>
-                      <option value="exterior">Exterior Painting</option>
-                      <option value="commercial">Commercial Painting</option>
-                      <option value="residential">Residential Painting</option>
-                      <option value="cabinet">Cabinet Painting</option>
-                      <option value="deck">Deck & Fence Staining</option>
+                      <option value="interior-exterior">Interior & Exterior Painting</option>
+                      <option value="residential-commercial">Residential & Commercial</option>
+                      <option value="house-office-business">House, Office & Business Painting</option>
+                      <option value="pressure-washing">Pressure Washing</option>
+                      <option value="deck-staining">Deck Staining & Sealing</option>
+                      <option value="fences-railings">Fences & Railings</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
@@ -211,37 +208,6 @@ export default function ContactForm() {
                       className="w-full px-4 py-3 rounded-lg border bg-darkest border-slate-600 text-slate-200 focus:border-accent focus:ring-2 focus:ring-yellow-400/50 outline-none transition resize-none"
                       placeholder="Tell us about your project... (room size, number of rooms, etc.)"
                     ></textarea>
-                  </div>
-
-                  {/* Contact Method */}
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-300 mb-3">
-                      Preferred Contact Method *
-                    </label>
-                    <div className="flex gap-4">
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="contactMethod"
-                          value="phone"
-                          checked={formData.contactMethod === "phone"}
-                          onChange={handleChange}
-                          className="w-4 h-4 text-accent focus:ring-yellow-400/50"
-                        />
-                        <span className="text-slate-300">Phone</span>
-                      </label>
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="contactMethod"
-                          value="email"
-                          checked={formData.contactMethod === "email"}
-                          onChange={handleChange}
-                          className="w-4 h-4 text-accent focus:ring-yellow-400/50"
-                        />
-                        <span className="text-slate-300">Email</span>
-                      </label>
-                    </div>
                   </div>
 
                   {/* Submit Button */}
