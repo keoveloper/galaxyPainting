@@ -507,7 +507,7 @@ export default function ProjectGallery() {
 
     // Focus trap logic
     if (modalRef.current) {
-      const focusableElements = modalRef.current.querySelectorAll(
+      const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
       const firstElement = focusableElements[0];
@@ -516,7 +516,7 @@ export default function ProjectGallery() {
       // Focus first element when modal opens
       firstElement?.focus();
 
-      const handleTab = (e) => {
+      const handleTab = (e: KeyboardEvent) => {
         if (e.key === "Tab") {
           if (e.shiftKey && document.activeElement === firstElement) {
             e.preventDefault();
@@ -538,7 +538,7 @@ export default function ProjectGallery() {
 
   // Keyboard navigation
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (!selectedProject) return;
 
       if (e.key === "ArrowRight") {

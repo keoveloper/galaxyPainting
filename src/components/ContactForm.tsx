@@ -303,7 +303,7 @@ export default function ContactForm() {
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      rows="4"
+                      rows={4}
                       className="w-full px-4 py-3 rounded-lg border bg-darkest border-slate-600 text-slate-200 focus:border-accent focus:ring-2 focus:ring-yellow-400/50 outline-none transition resize-none"
                       placeholder="Tell us about your project... (room size, number of rooms, etc.)"
                     ></textarea>

@@ -118,19 +118,19 @@ const faqs = [
           }
         });
         
-        document.querySelectorAll('.faq-icon').forEach(i => {
+        document.querySelectorAll<HTMLElement>('.faq-icon').forEach(i => {
           if (i !== icon) {
             i.style.transform = 'rotate(0deg)';
           }
         });
-        
+
         // Toggle clicked item
         if (isOpen) {
           answer?.classList.add('hidden');
-          if (icon) icon.style.transform = 'rotate(0deg)';
+          if (icon instanceof HTMLElement) icon.style.transform = 'rotate(0deg)';
         } else {
           answer?.classList.remove('hidden');
-          if (icon) icon.style.transform = 'rotate(180deg)';
+          if (icon instanceof HTMLElement) icon.style.transform = 'rotate(180deg)';
         }
       });
     });

@@ -9,13 +9,9 @@ export default defineConfig({
 
   // Image optimization configuration
   image: {
-    // Enable sharp for image processing
+    // Enable sharp for image processing (default in Astro v3+)
     service: {
       entrypoint: 'astro/assets/services/sharp'
-    },
-    // Default image format
-    format: ['webp', 'avif'],
-    // Quality settings (1-100)
-    quality: 80,
+    }
   },
 });
