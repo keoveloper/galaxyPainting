@@ -1,8 +1,26 @@
-// src/components/ProjectGallery.jsx
-import { useState, useEffect } from "react";
+// src/components/ProjectGallery.tsx
+import { useState, useEffect, useRef } from "react";
+
+// Type definitions
+type ImageType = "before" | "after";
+type Category = "Interior" | "Exterior" | "Commercial";
+
+interface ProjectImage {
+  url: string;
+  caption: string;
+  type: ImageType;
+}
+
+interface Project {
+  id: number;
+  title: string;
+  category: Category;
+  thumbnail: string;
+  images: ProjectImage[];
+}
 
 // Real project data with actual images from /public/gallery
-const projects = [
+const projects: Project[] = [
   {
     id: 1,
     title: "Kitchen Cabinets Restoration",
@@ -110,11 +128,6 @@ const projects = [
     category: "Interior",
     thumbnail: "/gallery/interior/interior13.jpeg",
     images: [
-      {
-        url: "/gallery/interior/interior.jpeg",
-        caption: "Before - Old wall paint",
-        type: "before",
-      },
       {
         url: "/gallery/interior/interior2.jpeg",
         caption: "After - Fresh paint job",
@@ -357,31 +370,36 @@ const projects = [
       },
       {
         url: "/gallery/fencesRailing/fencesRailing2.jpeg",
-        caption: "After - Painted fence",
+        caption: "Before - Painted fence",
         type: "before",
       },
       {
         url: "/gallery/fencesRailing/fencesRailing3.jpeg",
-        caption: "After - Railing detail",
+        caption: "Before - Railing detail",
         type: "before",
       },
       {
         url: "/gallery/fencesRailing/fencesRailing4.jpeg",
-        caption: "After - Different section",
+        caption: "Before - Different section",
         type: "before",
       },
       {
         url: "/gallery/fencesRailing/fencesRailing5.jpeg",
         caption: "After - Another angle",
-        type: "before",
+        type: "after",
       },
       {
         url: "/gallery/fencesRailing/fencesRailing6.jpeg",
-        caption: "After - Overall view",
+        caption: "After - Up view",
         type: "after",
       },
       {
         url: "/gallery/fencesRailing/fencesRailing7.jpeg",
+        caption: "After - Overall view",
+        type: "after",
+      },
+      {
+        url: "/gallery/fencesRailing/fencesRailing8.jpeg",
         caption: "After - Final result",
         type: "after",
       },
@@ -438,9 +456,12 @@ const projects = [
 ];
 
 export default function ProjectGallery() {
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState<Category | "all">(
+    "all",
+  );
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   // Filter projects by category
   const filteredProjects =
@@ -449,21 +470,21 @@ export default function ProjectGallery() {
       : projects.filter((p) => p.category === selectedCategory);
 
   // Open modal with project
-  const openModal = (project) => {
+  const openModal = (project: Project): void => {
     setSelectedProject(project);
     setCurrentImageIndex(0);
     document.body.style.overflow = "hidden"; // Prevent background scroll
   };
 
   // Close modal
-  const closeModal = () => {
+  const closeModal = (): void => {
     setSelectedProject(null);
     setCurrentImageIndex(0);
     document.body.style.overflow = "auto";
   };
 
   // Navigate to next image
-  const nextImage = () => {
+  const nextImage = (): void => {
     if (selectedProject) {
       setCurrentImageIndex((prev) =>
         prev === selectedProject.images.length - 1 ? 0 : prev + 1,
@@ -472,7 +493,7 @@ export default function ProjectGallery() {
   };
 
   // Navigate to previous image
-  const prevImage = () => {
+  const prevImage = (): void => {
     if (selectedProject) {
       setCurrentImageIndex((prev) =>
         prev === 0 ? selectedProject.images.length - 1 : prev - 1,
@@ -480,21 +501,73 @@ export default function ProjectGallery() {
     }
   };
 
-  // Keyboard navigation with useEffect
+  // Keyboard navigation and focus trap with useEffect
+  useEffect(() => {
+    if (!selectedProject) return;
+
+    // Focus trap logic
+    if (modalRef.current) {
+      const focusableElements = modalRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      // Focus first element when modal opens
+      firstElement?.focus();
+
+      const handleTab = (e) => {
+        if (e.key === "Tab") {
+          if (e.shiftKey && document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement?.focus();
+          } else if (!e.shiftKey && document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement?.focus();
+          }
+        }
+      };
+
+      window.addEventListener("keydown", handleTab);
+
+      return () => {
+        window.removeEventListener("keydown", handleTab);
+      };
+    }
+  }, [selectedProject]);
+
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!selectedProject) return;
 
-      if (e.key === "ArrowRight") nextImage();
-      if (e.key === "ArrowLeft") prevImage();
-      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowRight") {
+        setCurrentImageIndex((prev) =>
+          prev === selectedProject.images.length - 1 ? 0 : prev + 1,
+        );
+      }
+      if (e.key === "ArrowLeft") {
+        setCurrentImageIndex((prev) =>
+          prev === 0 ? selectedProject.images.length - 1 : prev - 1,
+        );
+      }
+      if (e.key === "Escape") {
+        setSelectedProject(null);
+        setCurrentImageIndex(0);
+        document.body.style.overflow = "auto";
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedProject]);
+  }, [selectedProject, currentImageIndex]);
 
-  const categories = ["all", "Interior", "Exterior", "Commercial"];
+  const categories: (Category | "all")[] = [
+    "all",
+    "Interior",
+    "Exterior",
+    "Commercial",
+  ];
 
   return (
     <section id="gallery" className="py-20 bg-darkest">
@@ -628,6 +701,7 @@ export default function ProjectGallery() {
         >
           {/* Modal Content */}
           <div
+            ref={modalRef}
             className="relative w-full h-full max-w-7xl mx-auto p-4 md:p-8 flex flex-col max-h-screen overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >

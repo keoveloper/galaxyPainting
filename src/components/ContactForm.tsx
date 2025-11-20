@@ -1,8 +1,24 @@
-// src/components/ContactForm.jsx
-import { useState } from "react";
+// src/components/ContactForm.tsx
+import { useState, type ChangeEvent, type FormEvent } from "react";
+
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  serviceType: string;
+  message: string;
+}
+
+type SubmitStatus = "success" | "error" | null;
+
+interface ValidationErrors {
+  email?: string;
+  phone?: string;
+}
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     phone: "",
@@ -11,21 +27,63 @@ export default function ContactForm() {
     message: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(null);
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
+    {},
+  );
 
-  const handleChange = (e) => {
+  // Validation functions
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string): boolean => {
+    const phoneRegex = /^[\d\s\-\(\)]+$/;
+    return phoneRegex.test(phone) && phone.replace(/\D/g, "").length >= 10;
+  };
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+
+    // Clear validation error when user starts typing
+    if (validationErrors[name as keyof ValidationErrors]) {
+      setValidationErrors((prev) => ({
+        ...prev,
+        [name]: undefined,
+      }));
+    }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
+    setValidationErrors({});
+
+    // Validate inputs
+    const errors: ValidationErrors = {};
+
+    if (!validateEmail(formData.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+
+    if (!validatePhone(formData.phone)) {
+      errors.phone = "Please enter a valid phone number (at least 10 digits)";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -118,9 +176,25 @@ export default function ContactForm() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-lg border bg-darkest border-slate-600 text-slate-200 focus:border-accent focus:ring-2 focus:ring-yellow-400/50 outline-none transition"
+                        className={`w-full px-4 py-3 rounded-lg border bg-darkest text-slate-200 focus:ring-2 outline-none transition ${
+                          validationErrors.email
+                            ? "border-red-500 focus:border-red-500 focus:ring-red-400/50"
+                            : "border-slate-600 focus:border-accent focus:ring-yellow-400/50"
+                        }`}
                         placeholder="john@example.com"
+                        aria-invalid={validationErrors.email ? "true" : "false"}
+                        aria-describedby={
+                          validationErrors.email ? "email-error" : undefined
+                        }
                       />
+                      {validationErrors.email && (
+                        <p
+                          id="email-error"
+                          className="text-red-400 text-sm mt-1"
+                        >
+                          {validationErrors.email}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -140,9 +214,25 @@ export default function ContactForm() {
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-lg border bg-darkest border-slate-600 text-slate-200 focus:border-accent focus:ring-2 focus:ring-yellow-400/50 outline-none transition"
+                        className={`w-full px-4 py-3 rounded-lg border bg-darkest text-slate-200 focus:ring-2 outline-none transition ${
+                          validationErrors.phone
+                            ? "border-red-500 focus:border-red-500 focus:ring-red-400/50"
+                            : "border-slate-600 focus:border-accent focus:ring-yellow-400/50"
+                        }`}
                         placeholder="(555) 555-1234"
+                        aria-invalid={validationErrors.phone ? "true" : "false"}
+                        aria-describedby={
+                          validationErrors.phone ? "phone-error" : undefined
+                        }
                       />
+                      {validationErrors.phone && (
+                        <p
+                          id="phone-error"
+                          className="text-red-400 text-sm mt-1"
+                        >
+                          {validationErrors.phone}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label
@@ -181,12 +271,21 @@ export default function ContactForm() {
                       className="w-full px-4 py-3 rounded-lg border bg-darkest border-slate-600 text-slate-200 focus:border-accent focus:ring-2 focus:ring-yellow-400/50 outline-none transition"
                     >
                       <option value="">Select a service...</option>
-                      <option value="interior-exterior">Interior & Exterior Painting</option>
-                      <option value="residential-commercial">Residential & Commercial</option>
-                      <option value="house-office-business">House, Office & Business Painting</option>
+                      <option value="interior-exterior">
+                        Interior & Exterior Painting
+                      </option>
+                      <option value="residential-commercial">
+                        Residential & Commercial
+                      </option>
+                      <option value="house-office-business">
+                        House, Office & Business Painting
+                      </option>
                       <option value="pressure-washing">Pressure Washing</option>
-                      <option value="deck-staining">Deck Staining & Sealing</option>
+                      <option value="deck-staining">
+                        Deck Staining & Sealing
+                      </option>
                       <option value="fences-railings">Fences & Railings</option>
+                      <option value="review">Review</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
@@ -259,55 +358,60 @@ export default function ContactForm() {
                     )}
                   </button>
 
-                  {/* Success/Error Messages */}
-                  {submitStatus === "success" && (
-                    <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg flex items-start space-x-3">
-                      <svg
-                        className="w-5 h-5 mt-0.5 flex-shrink-0"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <div>
-                        <p className="font-semibold">
-                          Thank you for your request!
-                        </p>
-                        <p className="text-sm">
-                          We'll contact you within 24 hours with your free
-                          estimate.
-                        </p>
+                  {/* Success/Error Messages with ARIA live regions */}
+                  <div role="status" aria-live="polite" aria-atomic="true">
+                    {submitStatus === "success" && (
+                      <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg flex items-start space-x-3">
+                        <svg
+                          className="w-5 h-5 mt-0.5 flex-shrink-0"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <div>
+                          <p className="font-semibold">
+                            Thank you for your request!
+                          </p>
+                          <p className="text-sm">
+                            We'll contact you within 24 hours with your free
+                            estimate.
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {submitStatus === "error" && (
-                    <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg flex items-start space-x-3">
-                      <svg
-                        className="w-5 h-5 mt-0.5 flex-shrink-0"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <div>
-                        <p className="font-semibold">
-                          Oops! Something went wrong.
-                        </p>
-                        <p className="text-sm">
-                          Please try again or call us directly at (555) 555-1234
-                        </p>
+                    {submitStatus === "error" && (
+                      <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg flex items-start space-x-3">
+                        <svg
+                          className="w-5 h-5 mt-0.5 flex-shrink-0"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <div>
+                          <p className="font-semibold">
+                            Oops! Something went wrong.
+                          </p>
+                          <p className="text-sm">
+                            Please try again or call us directly at (812) 557
+                            3291
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
 
                   <p className="text-sm text-slate-400 text-center">
                     We respect your privacy and will never share your
@@ -431,7 +535,9 @@ export default function ContactForm() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className="text-slate-300">No pressure to commit</span>
+                    <span className="text-slate-300">
+                      No pressure to commit
+                    </span>
                   </li>
                 </ul>
               </div>

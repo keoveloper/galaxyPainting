@@ -1,23 +1,27 @@
-// src/components/FloatingButtons.jsx
+// src/components/FloatingButtons.tsx
 import { useState, useEffect } from "react";
 
 export default function FloatingButtons() {
-  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState<boolean>(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowBackToTop(true);
-      } else {
-        setShowBackToTop(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setShowBackToTop(window.scrollY > 300);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = (): void => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",

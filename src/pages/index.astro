@@ -12,14 +12,15 @@ import Testimonials from '../components/Testimonials.astro';
 import ServiceArea from '../components/ServiceArea.astro';
 import AboutUs from '../components/AboutUs.astro';
 import FAQ from '../components/FAQ.astro';
-import ContactForm from '../components/ContactForm.jsx';
+import ContactForm from '../components/ContactForm.tsx';
 import Footer from '../components/Footer.astro';
-import FloatingButtons from '../components/FloatingButtons.jsx';
+import FloatingButtons from '../components/FloatingButtons.tsx';
 ---
 
 <Layout title="ProPaint - Professional Painting Services & Insured">
   <Header />
-  <Hero />
+  <main id="main-content">
+    <Hero />
   <AboutUs />
   <Services />
   <WhyChooseUs />
@@ -29,8 +30,9 @@ import FloatingButtons from '../components/FloatingButtons.jsx';
   <Testimonials />
   <ServiceArea />
   <FAQ />
-  <ContactForm client:load />
-  <!-- <ContactInfo /> -->
+    <ContactForm client:load />
+    <!-- <ContactInfo /> -->
+  </main>
   <Footer />
   <FloatingButtons client:load />
 </Layout>
